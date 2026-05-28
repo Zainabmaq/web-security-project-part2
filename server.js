@@ -1,17 +1,34 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+const helmet = require('helmet');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-// CORS - sirf apni site se requests allow karo
+// Helmet - security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", 'data:'],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+  },
+}));
+
+// CORS
 app.use(cors({
   origin: 'http://localhost:4000'
 }));
 
-// Rate Limiting - 100 requests per 15 minutes
+// Rate Limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -28,7 +45,6 @@ function requireApiKey(req, res, next) {
   next();
 }
 
-// Routes
 app.get('/', (req, res) => {
   res.send('Security Project Running!');
 });
