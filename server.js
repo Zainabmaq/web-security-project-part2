@@ -2,12 +2,15 @@ const express = require('express');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-// Helmet - security headers
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -17,26 +20,20 @@ app.use(helmet({
       imgSrc: ["'self'", 'data:'],
     },
   },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-  },
+  hsts: { maxAge: 31536000, includeSubDomains: true },
 }));
 
-// CORS
-app.use(cors({
-  origin: 'http://localhost:4000'
-}));
+app.use(cors({ origin: 'http://localhost:4000' }));
 
-// Rate Limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
-  message: { error: 'Too many requests, slow down!' }
+  message: { error: 'Too many requests!' }
 });
 app.use('/api/', limiter);
 
-// API Key middleware
+const csrfProtection = csrf({ cookie: true });
+
 function requireApiKey(req, res, next) {
   const key = req.headers['x-api-key'];
   if (key !== process.env.API_KEY) {
@@ -49,8 +46,16 @@ app.get('/', (req, res) => {
   res.send('Security Project Running!');
 });
 
+app.get('/csrf-token', csrfProtection, (req, res) => {
+  res.json({ token: req.csrfToken() });
+});
+
 app.get('/api/data', requireApiKey, (req, res) => {
   res.json({ message: 'Secret data!', status: 'authorized' });
+});
+
+app.post('/transfer', csrfProtection, (req, res) => {
+  res.json({ success: true, message: 'Transfer completed!' });
 });
 
 app.listen(4000, () => {
