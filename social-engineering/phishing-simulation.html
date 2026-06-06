@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Awareness Training</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; }
+
+    /* PHASE 1 - Fake login page */
+    .fake-login {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1877f2;
+    }
+    .login-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 350px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .login-box h1 { color: #1877f2; font-size: 2rem; text-align: center; margin-bottom: 20px; }
+    .login-box input {
+      width: 100%; padding: 12px;
+      margin: 8px 0; border: 1px solid #ddd;
+      border-radius: 6px; font-size: 1rem;
+    }
+    .login-box button {
+      width: 100%; padding: 12px;
+      background: #1877f2; color: white;
+      border: none; border-radius: 6px;
+      font-size: 1rem; cursor: pointer;
+      margin-top: 10px;
+    }
+    .login-box p { text-align: center; margin-top: 10px; font-size: 0.85rem; color: #666; }
+
+    /* PHASE 2 - Awareness message */
+    .awareness {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #fff3cd;
+    }
+    .awareness-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 600px;
+      border-left: 6px solid #ff6b6b;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .awareness-box h2 { color: #ff6b6b; font-size: 1.8rem; margin-bottom: 15px; }
+    .awareness-box p { color: #333; line-height: 1.7; margin-bottom: 15px; }
+    .awareness-box ul { padding-left: 20px; color: #333; line-height: 2; }
+    .tips {
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 4px solid #4caf50;
+    }
+    .tips h3 { color: #2e7d32; margin-bottom: 10px; }
+    .tips ul { color: #333; line-height: 2; }
+    .badge {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHASE 1: Fake Login Page (looks like Facebook) -->
+  <div class="fake-login" id="phase1">
+    <div class="login-box">
+      <h1>facebook</h1>
+      <p style="text-align:center; margin-bottom:15px; color:#333">
+        Log in to see photos from your friends
+      </p>
+      <input type="email" placeholder="Email address or phone number" id="email">
+      <input type="password" placeholder="Password" id="password">
+      <button onclick="showAwareness()">Log In</button>
+      <p>Forgotten password?</p>
+    </div>
+  </div>
+
+  <!-- PHASE 2: Awareness Training Message -->
+  <div class="awareness" id="phase2">
+    <div class="awareness-box">
+      <span class="badge">⚠️ SECURITY AWARENESS TRAINING</span>
+      <h2>You just fell for a phishing attack!</h2>
+      <p>
+        This was a <strong>simulated phishing exercise</strong> conducted as part of our
+        cybersecurity awareness training. No real data was collected or stored.
+      </p>
+      <p>
+        The fake login page you just saw was designed to look like <strong>Facebook</strong>.
+        Real attackers use similar techniques to steal your credentials.
+      </p>
+
+      <p><strong>🚩 Red flags you should have noticed:</strong></p>
+      <ul>
+        <li>The URL was NOT facebook.com</li>
+        <li>No HTTPS padlock in the address bar</li>
+        <li>You received this link via email/message unexpectedly</li>
+        <li>The page asked for login without a clear reason</li>
+      </ul>
+
+      <div class="tips">
+        <h3>✅ How to Stay Safe:</h3>
+        <ul>
+          <li>Always check the URL before entering credentials</li>
+          <li>Never click links in suspicious emails</li>
+          <li>Enable Two-Factor Authentication (2FA)</li>
+          <li>Use a password manager</li>
+          <li>Report suspicious emails to your IT team</li>
+        </ul>
+      </div>
+
+      <p style="margin-top:20px; color:#666; font-size:0.9rem">
+        <em>This simulation was conducted for educational purposes only as part of
+        Week 5 Ethical Hacking & Social Engineering Awareness Training.</em>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function showAwareness() {
+      // Log the simulation attempt (no real data stored)
+      console.log('[SIMULATION] User clicked login - showing awareness message');
+
+      // Switch from fake login to awareness page
+      document.getElementById('phase1').style.display = 'none';
+      document.getElementById('phase2').style.display = 'flex';
+
+      // Clear any entered data immediately
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+    }
+  </script>
+
+</body>
+</html>
