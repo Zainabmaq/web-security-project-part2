@@ -1,10 +1,6 @@
 # 🔐 Advanced Web Application Security Project
 ## Weeks 4, 5 & 6 — Complete Security Implementation
 
-**Student:** Zainab Maqbool  
-**Deadline:** 9th June, 2026  
-**Repo:** https://github.com/Zainabmaq/web-security-project-part2
-
 ---
 
 ## 📁 Project Files
@@ -44,17 +40,10 @@
 - ✅ **SQL Injection** — SQLMap scan performed
 - ✅ **SQLi Fix** — Parameterized queries applied
 
-### How to Test CSRF:
-1. Run server: `node server.js`
-2. Open ZAP → Automated Scan → http://localhost:4000
-3. HTTP History → POST request → Generate CSRF PoC
-4. Open PoC → Server returns 403 ✅
-
 ---
 
 ## 🔍 Week 6 — Security Audits & Deployment
 
-### Tools Used:
 | Tool | Result |
 |------|--------|
 | OWASP ZAP | 0 alerts — application passed ✅ |
@@ -62,36 +51,22 @@
 | Lynis | 279 tests — firewall & IDS active ✅ |
 | Docker | Non-root user, Alpine image ✅ |
 
-### Run Security Scans:
-```bash
-# Nikto
-nikto -h http://localhost:4000 -o nikto_report.html -Format html
-
-# Lynis
-sudo lynis audit system
-
-# Docker build
-sudo docker build -t security-app .
-```
-
 ---
 
 ## ⭐ Bonus Challenges
 
-### 1. Zero Trust Security
+### Zero Trust Security
 - JWT tokens (1 hour expiry)
 - API Key verification on every request
 - Role-Based Access Control (admin/user)
-- Input validation & sanitization
 
-### 2. Web Application Firewall (WAF)
-- ModSecurity v2.9.13 installed
-- OWASP Core Rule Set 3.3.9 enabled
+### Web Application Firewall (WAF)
+- ModSecurity v2.9.13 with OWASP CRS 3.3.9
 - SecRuleEngine: ON (active blocking)
 
-### 3. Social Engineering Simulation
+### Social Engineering Simulation
 - Phishing awareness training page
-- Fake login → awareness message
+- Fake login → awareness message shown
 - No data collected — educational only
 
 ---
@@ -99,28 +74,8 @@ sudo docker build -t security-app .
 ## 🚀 Setup & Run
 
 ```bash
-git clone https://github.com/Zainabmaq/web-security-project-part2.git
-cd web-security-project-part2
 npm install
 node server.js
 ```
 
 Server runs at: http://localhost:4000
-
----
-
-## 📊 OWASP Top 10 Compliance
-
-| Risk | Status |
-|------|--------|
-| A01 Broken Access Control | ✅ |
-| A02 Cryptographic Failures | ✅ |
-| A03 Injection | ✅ |
-| A04 Insecure Design | ✅ |
-| A05 Security Misconfiguration | ✅ |
-| A07 Auth Failures | ✅ |
-| A10 SSRF | ✅ |
-
----
-
-*For educational purposes only. All testing performed on locally hosted applications.*
