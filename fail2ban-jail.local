@@ -1,0 +1,16 @@
+[DEFAULT]
+bantime  = 600
+findtime = 600
+maxretry = 5
+
+[sshd]
+enabled = true
+port    = ssh
+logpath = /var/log/auth.log
+maxretry = 3
+
+[apache-auth]
+enabled  = true
+port     = http,https
+logpath  = /var/log/apache2/error.log
+maxretry = 5
